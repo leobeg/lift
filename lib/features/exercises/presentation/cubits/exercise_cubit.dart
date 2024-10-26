@@ -22,15 +22,14 @@ class ExerciseCubit extends Cubit<ExerciseState> {
     emit(ExerciseLogsLoaded(exerciseLogs));
   }
 
-  Future<void> createExercise() async {
+  Future<void> createExercise(Exercise exercise) async {
     emit(ExerciseCreating());
-    await exerciseRepo.createExercise(Exercise(id: 0, name: "Split squats"));
+    await exerciseRepo.createExercise(exercise);
     emit(ExerciseCreated());
   }
 
   // TODO: Remove test function
-  Future<void> createExerciseLog() async {
-    await exerciseRepo.createExerciseLog(
-        ExerciseLog(exerciseId: 1, weight: 12, reps: 12), 1);
+  Future<void> createExerciseLog(ExerciseLog exerciseLog, Exercise exercise) async {
+    await exerciseRepo.createExerciseLog(exerciseLog, exercise.id);
   }
 }

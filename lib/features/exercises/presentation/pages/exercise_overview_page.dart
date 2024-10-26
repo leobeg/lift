@@ -54,7 +54,7 @@ class _ExerciseOverviewPageState extends State<ExerciseOverviewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Test Page"),
+        title: const Text("Test Page"),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,8 +65,8 @@ class _ExerciseOverviewPageState extends State<ExerciseOverviewPage> {
             },
             child: Container(
               color: Colors.amber,
-              padding: EdgeInsets.all(5),
-              child: Text("Get Exercises"),
+              padding: const EdgeInsets.all(5),
+              child: const Text("Get Exercises"),
             ),
           ),
           GestureDetector(
@@ -75,8 +75,8 @@ class _ExerciseOverviewPageState extends State<ExerciseOverviewPage> {
             },
             child: Container(
               color: Colors.amber,
-              padding: EdgeInsets.all(5),
-              child: Text("Create Exercise"),
+              padding: const EdgeInsets.all(5),
+              child: const Text("Create Exercise"),
             ),
           ),
           GestureDetector(
@@ -85,8 +85,8 @@ class _ExerciseOverviewPageState extends State<ExerciseOverviewPage> {
             },
             child: Container(
               color: Colors.amber,
-              padding: EdgeInsets.all(5),
-              child: Text("Get ExerciseLogs"),
+              padding: const EdgeInsets.all(5),
+              child: const Text("Get ExerciseLogs"),
             ),
           ),
           GestureDetector(
@@ -95,9 +95,48 @@ class _ExerciseOverviewPageState extends State<ExerciseOverviewPage> {
             },
             child: Container(
               color: Colors.amber,
-              padding: EdgeInsets.all(5),
-              child: Text("Create ExerciseLogs"),
+              padding: const EdgeInsets.all(5),
+              child: const Text("Create ExerciseLogs"),
             ),
+          ), 
+          Expanded(
+            child: ListView.builder(itemCount: exercises.length, itemBuilder: (context, index) {
+              final exercise = exercises[index];
+              return Container(
+                margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(10)
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(exercise.name, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),),
+                            Text("Bodyweight exercise", style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.onSurfaceVariant),),
+                          ],
+                        ),
+                        Text("${exercise.usualSetCount} sets", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 22),)
+                      ],
+                    ),
+                    const SizedBox(height: 15,),
+                    Text("Log", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),),
+                    const SizedBox(height: 5,),
+                    ListView.builder(shrinkWrap: true, physics: ClampingScrollPhysics(), itemCount: 3, itemBuilder: (context, index) {
+                      return Text("26.10.24: 3 sets  x  20 reps  at  25kg", style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16, color: Theme.of(context).colorScheme.onSurfaceVariant),);
+                    },),
+                    const SizedBox(height: 5,),
+                    Text("Show more...", style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),),
+                  ],
+                ),
+              );
+            },),
           )
         ],
       ),
